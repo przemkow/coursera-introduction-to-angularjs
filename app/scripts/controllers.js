@@ -1,11 +1,15 @@
 'use strict';
+
 angular.module('confusionApp')
 
 .controller('MenuController', ['$scope', 'menuFactory', function($scope, menuFactory) {
+
   $scope.tab = 1;
   $scope.filtText = '';
   $scope.showDetails = false;
-  $scope.dishes = menuFactory.getDishes();
+
+  $scope.dishes= menuFactory.getDishes();
+
 
   $scope.select = function(setTab) {
     $scope.tab = setTab;
@@ -74,20 +78,30 @@ angular.module('confusionApp')
 
 .controller('DishCommentController', ['$scope', function($scope) {
 
-  $scope.newDishComment = {author:'', rating: '5', comment:'', date:''};
-  var radiobuttonRates = [{value:"1", label:"1"},
-                          {value:"2", label:"2"},
-                          {value:"3", label:"3"},
-                          {value:"4", label:"4"},
-                          {value:"5", label:"5"}];
-  $scope.radiobuttonRates = radiobuttonRates;
+  $scope.mycomment = {rating:5, comment:"", author:"", date:""};
 
   $scope.submitComment = function () {
-    $scope.newDishComment.date  = new Date().toISOString();
-    $scope.dish.comments.push($scope.newDishComment);
+
+    $scope.mycomment.date = new Date().toISOString();
+    console.log($scope.mycomment);
+
+    $scope.dish.comments.push($scope.mycomment);
+
     $scope.commentForm.$setPristine();
-    $scope.newDishComment = {author:'', rating: '5', comment:'', date:''};
+
+    $scope.mycomment = {rating:5, comment:"", author:"", date:""};
   };
 }])
 
+// implement the IndexController and About Controller here
+
+.controller('IndexController',['$scope', 'menuFactory', 'corporateFactory', function($scope, menuFactory, corporateFactory){
+  $scope.recommendedDish = menuFactory.getDish(0);
+  $scope.monthPromotions = menuFactory.getPromotions();
+  $scope.executiveChef = corporateFactory.getLeader(3);
+}])
+
+.controller('AboutController',['$scope', 'corporateFactory', function($scope, corporateFactory){
+  $scope.corporateLeadership = corporateFactory.getLeaders();
+}])
 ;

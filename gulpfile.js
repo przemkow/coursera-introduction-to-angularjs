@@ -64,9 +64,12 @@ gulp.task('move', function(){
 // Watch
 gulp.task('watch', ['browser-sync'], function() {
   // Watch .js files
-  gulp.watch('{app/scripts/**/*.js,app/styles/**/*.css,app/**/*.html}', ['usemin']);
+  gulp.watch('{app/scripts/**/*.js,app/styles/**/*.css,app/index.html}', ['usemin']);
   // Watch image files
   gulp.watch('app/images/**/*', ['imagemin']);
+
+  gulp.watch('{app/**/*.html,!app/index.html}', ['move']);
+
 
 });
 
