@@ -1,10 +1,12 @@
 <div class="container">
   <div class="row row-content" ng-controller="MenuController">
-
+    <div class="col-xs-12" ng-if="!showMenu">
+        <h3>{{message}}</h3>
+    </div>
+    <div class="col-xs-12" ng-if="showMenu">
     <button ng-click="toggleDetails()" class="btn btn-xs btn-primary pull-right" type="button">
       {{showDetails ? 'Hide Details':'Show Details'}}
     </button>
-    <div class="col-xs-12">
       <ul class="nav nav-tabs" role="tablist">
         <li role="presentation"
           ng-class="{active:isSelected(1)}">
