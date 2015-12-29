@@ -1,5 +1,6 @@
 'use strict';
 angular.module('confusionApp', ['ui.router'])
+.constant("baseURL","http://localhost:3000/")
 .config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
     // route for the home page
